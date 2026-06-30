@@ -166,6 +166,35 @@
         color: var(--text-main);
       }
 
+      .code-container {
+        position: relative;
+        margin: 15px 0;
+      }
+
+      .code-container pre {
+        margin: 0;
+      }
+
+      .copy-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        color: var(--text-muted);
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.8rem;
+        transition: all 0.2s;
+      }
+
+      .copy-btn:hover {
+        background-color: var(--accent-blue);
+        color: white;
+        border-color: var(--accent-blue);
+      }
+
       /* Code Block Styling */
       pre {
         background-color: var(--code-bg);
@@ -173,7 +202,6 @@
         padding: 15px;
         border-radius: 8px;
         overflow-x: auto;
-        margin: 15px 0;
       }
 
       code {
@@ -238,11 +266,27 @@
           max-width: 100%;
         }
       }
+      .note {
+        background: rgba(59, 130, 246, 0.1);
+        border-left: 4px solid var(--accent-blue);
+        padding: 16px 20px;
+        border-radius: 0 8px 8px 0;
+        margin: 0 0 30px 0;
+        color: #cbd5e1;
+        line-height: 1.6;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <h1>Accessibility Configuration Guide</h1>
+
+      <div class="note">
+        <strong>Note:</strong> Once installed please comment back with the
+        custom code screenshot, link of Accessibility Statement page, and the
+        hex color code needed to be added for the widget. Tag
+        <strong>Raees</strong> and <strong>Sameer</strong>.
+      </div>
 
       <div class="toggle-container">
         <span id="label-basic" class="switch-label active"
@@ -278,7 +322,10 @@
           <li>Enter this code:</li>
         </ol>
 
-        <pre><code>&lt;script src="https://cdn.userway.org/widget.js" data-account="062WMb6Yf6"&gt;&lt;/script&gt;</code></pre>
+        <div class="code-container">
+          <pre><code>&lt;script src="https://cdn.userway.org/widget.js" data-account="062WMb6Yf6"&gt;&lt;/script&gt;</code></pre>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
 
         <div class="meta-info">
           Make sure to mark the priority as <strong>10</strong> and place it
@@ -347,7 +394,10 @@
           <li>Enter this code:</li>
         </ol>
 
-        <pre><code>&lt;script src="https://cdn.userway.org/widget.js" data-account="y0juzG0O0x"&gt;&lt;/script&gt;</code></pre>
+        <div class="code-container">
+          <pre><code>&lt;script src="https://cdn.userway.org/widget.js" data-account="y0juzG0O0x"&gt;&lt;/script&gt;</code></pre>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
 
         <div class="meta-info">
           Make sure to mark the priority as <strong>10</strong> and place it
@@ -377,6 +427,18 @@
           labelBasic.classList.add("active")
           labelPro.classList.remove("active")
         }
+      }
+
+      function copyCode(button) {
+        const pre = button.previousElementSibling
+        const text = pre.textContent
+        navigator.clipboard.writeText(text).then(() => {
+          const originalText = button.textContent
+          button.textContent = "Copied!"
+          setTimeout(() => {
+            button.textContent = originalText
+          }, 2000)
+        })
       }
     </script>
   </body>

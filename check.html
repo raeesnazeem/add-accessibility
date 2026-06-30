@@ -59,6 +59,76 @@
       font-size: 1.1rem;
     }
 
+    .code-container {
+      position: relative;
+      margin: 15px 0;
+    }
+
+    .code-container pre {
+      margin: 0;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background-color: var(--accent-blue);
+      color: white;
+      border-color: var(--accent-blue);
+    }
+
+    .note {
+      background: rgba(59, 130, 246, 0.1);
+      border-left: 4px solid var(--accent-blue);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 40px 0 20px 0;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+    
+    .note code {
+      background: rgba(0,0,0,0.2);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #38bdf8;
+    }
+
+    .image-wrapper {
+      margin: 20px 0 30px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      background-color: var(--code-bg);
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .image-caption {
+      padding: 12px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      border-top: 1px solid var(--border-color);
+      background-color: var(--card-bg);
+    }
+
     /* Code Block Styling */
     pre {
       background-color: var(--code-bg);
@@ -66,7 +136,6 @@
       padding: 15px;
       border-radius: 8px;
       overflow-x: auto;
-      margin: 15px 0;
     }
 
     code {
@@ -102,11 +171,45 @@
     <p>In page source, use <strong>ctrl+f</strong> or <strong>cmd+f</strong> to search.</p>
 
     <h2>If Basic, search for:</h2>
-    <pre><code>&lt;script src="https://cdn.userway.org/widget.js" data-account="y0juzG0O0x"&gt;&lt;/script&gt;</code></pre>
+    <div class="code-container">
+      <pre><code>&lt;script src="https://cdn.userway.org/widget.js" data-account="y0juzG0O0x"&gt;&lt;/script&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+    
+    <div class="image-wrapper">
+      <img src="basic.png" alt="Basic Accessibility" />
+      <div class="image-caption">Basic Accessibility</div>
+    </div>
 
     <h2>If Pro/Complete, search for:</h2>
-    <pre><code>&lt;script src="https://cdn.userway.org/widget.js" data-account="062WMb6Yf6"&gt;&lt;/script&gt;</code></pre>
+    <div class="code-container">
+      <pre><code>&lt;script src="https://cdn.userway.org/widget.js" data-account="062WMb6Yf6"&gt;&lt;/script&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+
+    <div class="image-wrapper">
+      <img src="pro.png" alt="Pro Accessibility" />
+      <div class="image-caption">Pro Accessibility</div>
+    </div>
+
+    <div class="note">
+      <strong>Note:</strong> Some websites may have a different script. In that case, if we find <code>data-account="062WMb6Yf6"</code> in the page source, it is Pro/Complete Accessibility. If we find <code>data-account="y0juzG0O0x"</code> - it is Basic Accessibility.<br><br>
+      If faced with further issues, please tag <strong>Raees</strong> and <strong>Sameer</strong> with the issue mentioned.
+    </div>
 
   </div>
+  <script>
+    function copyCode(button) {
+      const pre = button.previousElementSibling;
+      const text = pre.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(() => {
+          button.textContent = originalText;
+        }, 2000);
+      });
+    }
+  </script>
 </body>
 </html>
