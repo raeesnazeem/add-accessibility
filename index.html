@@ -266,7 +266,7 @@
           max-width: 100%;
         }
       }
-      .note {
+        .note {
         background: rgba(59, 130, 246, 0.1);
         border-left: 4px solid var(--accent-blue);
         padding: 16px 20px;
@@ -274,6 +274,42 @@
         margin: 0 0 30px 0;
         color: #cbd5e1;
         line-height: 1.6;
+      }
+
+      /* Lightbox Styles */
+      .lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        justify-content: center;
+        align-items: center;
+      }
+      .lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        border-radius: 8px;
+      }
+      .lightbox-close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .generator-image img {
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+      .generator-image img:hover {
+        opacity: 0.8;
       }
     </style>
   </head>
@@ -406,6 +442,12 @@
       </div>
     </div>
 
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+      <span class="lightbox-close">&times;</span>
+      <img id="lightbox-img" src="" alt="Lightbox image">
+    </div>
+
     <script>
       function toggleContent() {
         const toggle = document.getElementById("accessibility-toggle")
@@ -440,6 +482,20 @@
           }, 2000)
         })
       }
+
+      function openLightbox(src) {
+        document.getElementById('lightbox-img').src = src;
+        document.getElementById('lightbox').style.display = 'flex';
+      }
+
+      function closeLightbox() {
+        document.getElementById('lightbox').style.display = 'none';
+      }
+
+      // Attach click events to all images except the lightbox image itself
+      document.querySelectorAll('img:not(#lightbox-img)').forEach(img => {
+        img.onclick = function() { openLightbox(this.src); };
+      });
     </script>
   </body>
 </html>
